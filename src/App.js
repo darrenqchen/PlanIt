@@ -1,12 +1,16 @@
+import React from 'react';
 import './App.css';
-import landingScreen from './oceanstaticlandingpage.jpg';
 
 function App() {
   return (
-    <div className="App">
-      <img src={landingScreen} alt="landing screen" />
-      <header className="App-header"></header>
-    </div>
+    <div
+      className="App"
+      style={{
+        backgroundImage: 'url(/oceanstaticlandingpage.jpg)',
+        width: '100vw',
+        height: '100vh'
+      }}
+    ></div>
   );
 }
 
