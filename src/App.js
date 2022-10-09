@@ -6,7 +6,7 @@ function App() {
     <div
       className="App"
       style={{
-        backgroundImage: 'url(/oceanstaticlandingpage.jpg)',
+        backgroundImage: 'url(/landingpage.jpg)',
         width: '100vw',
         height: '100vh'
       }}
