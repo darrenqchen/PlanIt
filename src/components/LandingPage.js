@@ -15,6 +15,7 @@ import { borderRadius } from '@mui/system';
 
 import PlanitLogoFilled from './PlanitLogoFilled';
 import PlanitLogoOutlined from './PlanitLogoOutlined';
+import PlanitLogoTextUnder from './PlanitLogoTextUnder';
 
 const LandingPage = () => {
   const [activeBackground, setActiveBackground] = useState({});
@@ -66,12 +67,19 @@ const LandingPage = () => {
       }}
     >
       <Stack
-        paddingTop={'8%'}
+        paddingTop={'7%'}
         paddingLeft={'10%'}
         direction="row"
         spacing={'45%'}
       >
-        <PlanitLogoFilled />
+        <Stack alignItems="start" spacing={2}>
+          <PlanitLogoTextUnder />
+          <Typography variant="h5" color="text.secondary" maxWidth={500}>
+            {
+              'The only tool designed to plan your trip and minimize your carbon footprint at every step of your journey.'
+            }
+          </Typography>
+        </Stack>
         <Stack alignItems="start" spacing="140%">
           <Card
             sx={{
