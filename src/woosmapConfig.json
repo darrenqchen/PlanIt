@@ -1,0 +1,10 @@
+{
+  "woosmapMapJSUrl": "https://sdk.woosmap.com/map/map.js?key=woos-b15dcbad-3a4e-3b3b-a974-ebc501caa1cd",
+  "woosmapMapOptions": {
+    "center": {
+      "lat": 46.2276,
+      "lng": 2.2137
+    },
+    "zoom": 5
+  }
+}

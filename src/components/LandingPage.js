@@ -11,17 +11,14 @@ import {
 } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import ModeOfTravelIcon from '@mui/icons-material/ModeOfTravel';
-import { borderRadius } from '@mui/system';
+import { useNavigate } from 'react-router-dom';
 
 import PlanitLogoFilled from './PlanitLogoFilled';
-import PlanitLogoOutlined from './PlanitLogoOutlined';
-import PlanitLogoTextUnder from './PlanitLogoTextUnder';
-import ChooseApiClient from '../amadeusAPI';
-import AmadeusAPI from '../amadeusAPI';
 
 const LandingPage = () => {
   const [activeBackground, setActiveBackground] = useState({});
   const [firstRender, setFirstRender] = useState(true);
+  const navigate = useNavigate();
   const potentialBackgrounds = [
     {
       url: '/chichenitza.jpg',
@@ -153,29 +150,14 @@ const LandingPage = () => {
               borderRadius: '20px'
             }}
             endIcon={<div></div>}
+            onClick={() => {
+              navigate('/plan');
+            }}
           >
             {'Plan your trip'}
           </Button>
         </Grid>
       </Grid>
-      <div>
-        <Button
-          variant="outlined"
-          sx={{
-            minWidth: 200,
-            backdropFilter: 'blur(1px)',
-            backgroundColor: 'rgba(255, 255, 255, 0.01)',
-            borderRadius: '20px'
-          }}
-          endIcon={<div></div>}
-          onClick={() => {
-            const client = new AmadeusAPI();
-            //console.log(client.getTravelRecommendations('PAR'))
-          }}
-        >
-          {'Plan your trip'}
-        </Button>
-      </div>
     </div>
   );
 };
