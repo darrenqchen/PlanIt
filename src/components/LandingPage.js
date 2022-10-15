@@ -7,7 +7,8 @@ import {
   CardContent,
   CardActions,
   Divider,
-  Grid
+  Grid,
+  Hidden
 } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import ModeOfTravelIcon from '@mui/icons-material/ModeOfTravel';
@@ -17,7 +18,7 @@ import PlanitLogoFilled from './PlanitLogoFilled';
 import VideoBackground from './VideoBackground';
 
 const LandingPage = () => {
-  const videoRef = `../videos/waves.mp4`
+  const videoRef = `../videos/waves.mp4`;
 
   const [activeBackground, setActiveBackground] = useState({});
   const [firstRender, setFirstRender] = useState(true);
@@ -65,7 +66,8 @@ const LandingPage = () => {
         width: '100vw',
         height: '100vh',
         margin: 0,
-        padding: 0
+        padding: 0,
+        overflowY: 'hidden'
       }}
     >
       <div
@@ -73,7 +75,7 @@ const LandingPage = () => {
           width: '100vw',
           height: '100vh',
           zIndex: 1,
-          position: "absolute"
+          position: 'absolute'
         }}
       >
         <VideoBackground
@@ -98,6 +100,7 @@ const LandingPage = () => {
         padding={'10%'}
         position="absolute"
         zIndex={1}
+        backgroundColor="rgba(0, 0, 0, 0.375)"
       >
         <Grid
           item
@@ -108,44 +111,64 @@ const LandingPage = () => {
         >
           <PlanitLogoFilled />
           <Card
+            variant="outlined"
             sx={{
-              minWidth: 200,
+              width: 270,
+              height: 120,
+              padding: '4px',
+              backgroundColor: 'rgba(255, 255, 255, 0.01)',
               backdropFilter: 'blur(5px)',
-              backgroundColor: 'rgba(255, 255, 255, 0.01)'
+              color: 'rgba(255, 255, 255)',
+              borderColor: 'white',
+              boxShadow: 'none',
+              borderRadius: '20px'
             }}
           >
-            <CardContent>
-              <Stack direction="row" spacing={2}>
-                <Typography variant="p" color="text.secondary" gutterBottom>
-                  {activeBackground.name}
-                </Typography>
-                <Divider
-                  orientation="vertical"
-                  variant="middle"
-                  color="primary.dark"
-                  flexItem
-                />
-                <Typography variant="p" color="text.secondary" gutterBottom>
-                  {activeBackground.location}
-                </Typography>
-              </Stack>
-              <Typography variant="p" color="text.secondary" component="div">
-                {activeBackground.description}
-              </Typography>
-            </CardContent>
             <CardActions>
               <IconButton>
-                <ModeOfTravelIcon color="primary.dark" />
+                <ModeOfTravelIcon
+                  style={{
+                    color: 'rgba(255, 255, 255, 1)'
+                  }}
+                />
               </IconButton>
-              <Typography paddingLeft={1} color="text.secondary">
-                Plan a trip here
+              <Typography color="text.secondary" variant="h6">
+                Go here
               </Typography>
             </CardActions>
+            <CardContent sx={{ p: 0, '&:last-child': { pb: 0 } }}>
+              <Grid container direction={'column'} maxWidth={'100%'}>
+                <Grid
+                  item
+                  container
+                  direction="row"
+                  justifyContent={'space-between'}
+                >
+                  <Typography
+                    variant="subtitle2"
+                    color="text.secondary"
+                    marginLeft={6}
+                  >
+                    {activeBackground.name}, {activeBackground.location}
+                  </Typography>
+                </Grid>
+                <Grid item container direction="row">
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                    component="div"
+                    marginLeft={6}
+                  >
+                    {activeBackground.description}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </CardContent>
           </Card>
         </Grid>
         <Grid item width={'100%'} container direction="column">
           <Typography
-            variant="h2"
+            variant="h3"
             color="text.secondary"
             maxWidth={'50%'}
             marginBottom={'2%'}
@@ -158,11 +181,12 @@ const LandingPage = () => {
             }
           </Typography>
         </Grid>
-        <Grid item container justifyContent="flex-end">
+        <Grid item container justifyContent="flex-start">
           <Button
             variant="outlined"
             sx={{
               minWidth: 250,
+              height: 53.75,
               backdropFilter: 'blur(5px)',
               color: 'rgba(255, 255, 255)',
               backgroundColor: 'rgba(255, 255, 255, 0.01)',
