@@ -24,26 +24,25 @@ const LandingPage = () => {
   const [firstRender, setFirstRender] = useState(true);
   const potentialBackgrounds = [
     {
-      url: '/chichenitza.jpg',
-      name: 'Chichen Itza',
-      location: 'Mexico',
-      carbonCost: '140kgCE',
-      description: 'a lovely place to visit'
+      url: `../videos/waves.mp4`,
+      name: 'Bay of Fundy',
+      location: 'Canada',
+      carbonCost: '120kgCE',
+      description: 'Stunning views of changing tides'
     },
     {
-      url: '/grandcanyon.jpg',
-      name: 'Grand Canyon',
-      location: 'USA',
+      url: `../videos/pyramids.mp4`,
+      name: 'Pyramids of Giza',
+      location: 'Egypt',
       carbonCost: '140kgCE',
-      description: 'beautiful and awe inspiring'
+      description: 'Explore an ancient wonder'
     },
     {
-      url: '/iceland.jpg',
-      name: 'Iceland Beach',
-      carbonCost: '140kgCE',
-      location: 'Iceland',
-
-      description: "don't freeze when you come here"
+      url: `../videos/mountain-range.mp4`,
+      name: 'Mount McKinley',
+      location: 'Alaska, USA',
+      carbonCost: '90kgCE',
+      description: 'Beautiful scenery tucked away in the last frontier'
     }
   ];
 
@@ -61,9 +60,7 @@ const LandingPage = () => {
   return (
     <div
       style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), 
-                url(${activeBackground.url})`,
-
+        backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1))`,
         backgroundSize: 'cover',
         width: '100vw',
         height: '100vh',
@@ -80,7 +77,7 @@ const LandingPage = () => {
         }}
       >
         <VideoBackground
-          videoRef={videoRef}
+          videoRef={activeBackground.url}
           style={{
             margin: 0,
             padding: 0,
