@@ -8,22 +8,26 @@ import {
   CardActions,
   Divider,
   Grid,
-  Hidden
+  Hidden,
+  Switch
 } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import ModeOfTravelIcon from '@mui/icons-material/ModeOfTravel';
 import { useNavigate } from 'react-router-dom';
 
 import PlanitLogoFilled from './PlanitLogoFilled';
-import VideoBackground from './VideoBackground';
+import VideoParent from './VideoParent';
+
 
 const LandingPage = () => {
   const [activeBackground, setActiveBackground] = useState({});
   const [firstRender, setFirstRender] = useState(true);
   const navigate = useNavigate();
+  const [ecoToggle, setEcoToggle] = useState(false);
   const potentialBackgrounds = [
     {
       url: `../videos/waves.mp4`,
+      fallback: `../videos/waves-fallback.jpeg`,
       name: 'Bay of Fundy',
       location: 'Canada',
       carbonCost: '120kgCE',
@@ -31,6 +35,7 @@ const LandingPage = () => {
     },
     {
       url: `../videos/mountain-range.mp4`,
+      fallback: `../videos/mountain-range-fallback.jpeg`,
       name: 'Mount McKinley',
       location: 'Alaska, USA',
       carbonCost: '90kgCE',
@@ -38,6 +43,7 @@ const LandingPage = () => {
     },
     {
       url: `../videos/night-sky.mp4`,
+      fallback: `../videos/night-sky-fallback.jpeg`,
       name: 'Yellowstone National Park',
       location: 'Wyoming, USA',
       carbonCost: '90kgCE',
@@ -45,6 +51,7 @@ const LandingPage = () => {
     },
     {
       url: `../videos/white-mountains.mp4`,
+      fallback: `../videos/white-mountains-fallback.jpeg`,
       name: 'White Mountains',
       location: 'New Hampshire, USA',
       carbonCost: '90kgCE',
@@ -83,16 +90,10 @@ const LandingPage = () => {
           position: 'absolute'
         }}
       >
-        <VideoBackground
-          videoRef={activeBackground.url}
-          style={{
-            margin: 0,
-            padding: 0,
-            position: 'absolute',
-            margin: 0,
-            objectFit: 'cover'
-          }}
-        ></VideoBackground>
+        <VideoParent 
+          background = {activeBackground}
+          eco = {ecoToggle}
+        ></VideoParent>
       </div>
       <Grid
         container
@@ -107,6 +108,7 @@ const LandingPage = () => {
         zIndex={1}
         backgroundColor="rgba(0, 0, 0, 0.375)"
       >
+        <Switch onClick={() => {setEcoToggle(!ecoToggle)}}/>
         <Grid
           item
           width={'100%'}
