@@ -16,6 +16,8 @@ import { borderRadius } from '@mui/system';
 import PlanitLogoFilled from './PlanitLogoFilled';
 import PlanitLogoOutlined from './PlanitLogoOutlined';
 import PlanitLogoTextUnder from './PlanitLogoTextUnder';
+import ChooseApiClient from '../amadeusAPI';
+import AmadeusAPI from '../amadeusAPI';
 
 const LandingPage = () => {
   const [activeBackground, setActiveBackground] = useState({});
@@ -126,6 +128,10 @@ const LandingPage = () => {
                 borderRadius: '20px'
               }}
               endIcon={<div></div>}
+              onClick={() => {
+                const client = new AmadeusAPI()
+                //console.log(client.getTravelRecommendations('PAR'))
+              }}
             >
               {'Plan your trip'}
             </Button>
