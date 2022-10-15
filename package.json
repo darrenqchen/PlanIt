@@ -45,6 +45,8 @@
     ]
   },
   "devDependencies": {
+    "@mui/x-date-pickers": "^5.0.4",
+    "dayjs": "^1.11.5",
     "eslint": "^8.25.0",
     "eslint-plugin-react": "^7.31.8",
     "husky": "^8.0.1",
