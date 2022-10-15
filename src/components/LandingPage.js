@@ -16,8 +16,8 @@ import { borderRadius } from '@mui/system';
 import PlanitLogoFilled from './PlanitLogoFilled';
 import PlanitLogoOutlined from './PlanitLogoOutlined';
 import PlanitLogoTextUnder from './PlanitLogoTextUnder';
-import ChooseApiClient from '../apiClients/amadeusAPI';
-import AmadeusAPI from '../apiClients/amadeusAPI';
+import ChooseApiClient from '../amadeusAPI';
+import AmadeusAPI from '../amadeusAPI';
 
 const LandingPage = () => {
   const [activeBackground, setActiveBackground] = useState({});
