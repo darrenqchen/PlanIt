@@ -14,12 +14,12 @@ import ModeOfTravelIcon from '@mui/icons-material/ModeOfTravel';
 import { borderRadius } from '@mui/system';
 
 import PlanitLogoFilled from './PlanitLogoFilled';
-import PlanitLogoOutlined from './PlanitLogoOutlined';
-import PlanitLogoTextUnder from './PlanitLogoTextUnder';
-import ChooseApiClient from '../amadeusAPI';
-import AmadeusAPI from '../amadeusAPI';
+import VideoBackground from './VideoBackground';
+
 
 const LandingPage = () => {
+  const videoRef = `../videos/waves.mp4`
+
   const [activeBackground, setActiveBackground] = useState({});
   const [firstRender, setFirstRender] = useState(true);
   const potentialBackgrounds = [
@@ -71,6 +71,25 @@ const LandingPage = () => {
         padding: 0
       }}
     >
+      <div
+        style={{
+          width: '100vw',
+          height: '100vh',
+          zIndex: 1,
+          position: "absolute"
+        }}
+      >
+        <VideoBackground
+          videoRef={videoRef}
+          style={{
+            margin: 0,
+            padding: 0,
+            position: 'absolute',
+            margin: 0,
+            objectFit: 'cover'
+          }}
+        ></VideoBackground>
+      </div>
       <Grid
         container
         direction="column"
@@ -80,6 +99,8 @@ const LandingPage = () => {
         height={'100%'}
         margin={'0%'}
         padding={'10%'}
+        position="absolute"
+        zIndex={1}
       >
         <Grid
           item
@@ -92,7 +113,7 @@ const LandingPage = () => {
           <Card
             sx={{
               minWidth: 200,
-              backdropFilter: 'blur(14px)',
+              backdropFilter: 'blur(5px)',
               backgroundColor: 'rgba(255, 255, 255, 0.01)'
             }}
           >
@@ -145,7 +166,7 @@ const LandingPage = () => {
             variant="outlined"
             sx={{
               minWidth: 250,
-              backdropFilter: 'blur(1px)',
+              backdropFilter: 'blur(5px)',
               color: 'rgba(255, 255, 255)',
               backgroundColor: 'rgba(255, 255, 255, 0.01)',
               borderColor: 'rgba(255, 255, 255)',
