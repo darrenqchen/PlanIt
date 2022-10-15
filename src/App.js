@@ -6,6 +6,7 @@ import LandingPage from './components/LandingPage';
 import PlanPage from './components/PlanPage';
 import { theme } from './config/Theme';
 import { Route, Routes } from 'react-router-dom';
+import './apiClients/amadeusAPI.js';
 
 function App() {
   return (

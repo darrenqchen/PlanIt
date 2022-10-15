@@ -1,32 +1,34 @@
 import React, { useRef, useEffect, useState } from 'react';
+import conf from '../woosmapConfig.json';
 import useScript from '../hooks/useScript';
 
 import '../styles/Map.css';
 
-const WoosMap = () => {
+const Map = () => {
   const mapContainerRef = useRef(null);
-  const woosmapLoaded = useScript(
-    `https://sdk.woosmap.com/map/map.js?key=woos-48c80350-88aa-333e-835a-07f4b658a9a4`
-  );
+  const [map, setMap] = useState(null);
+  const woosmapLoaded = useScript(conf.woosmapMapJSUrl);
 
   useEffect(() => {
     if (woosmapLoaded) {
-      console.log('loaded');
+      setMap(initMap());
     }
   }, [woosmapLoaded]);
 
   const initMap = () => {
-    map = new woosmap.map.Map(mapContainerRef.current, {
-      center: { lat: 51.50940214, lng: -0.133012 },
-      zoom: 13
-    });
+    const map = new window.woosmap.map.Map(
+      mapContainerRef.current,
+      conf.woosmapMapOptions
+    );
+    return map;
   };
 
   return (
-    <div>
-      <div className="mapContainer" ref={mapContainerRef} />
+    <div className="mapContainer">
+      <div ref={mapContainerRef} />
+      <div />
     </div>
   );
 };
 
-export default WoosMap;
+export default Map;
