@@ -61,7 +61,7 @@ const LandingPage = () => {
   return (
     <div
       style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), 
+        backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), 
                 url(${activeBackground.url})`,
 
         backgroundSize: 'cover',
@@ -81,8 +81,14 @@ const LandingPage = () => {
         margin={'0%'}
         padding={'10%'}
       >
-        <Grid item width={'100%'} marginBottom={'2%'} container justifyContent="space-between">
-          <PlanitLogoFilled/>
+        <Grid
+          item
+          width={'100%'}
+          marginBottom={'2%'}
+          container
+          justifyContent="space-between"
+        >
+          <PlanitLogoFilled />
           <Card
             sx={{
               minWidth: 200,
@@ -90,8 +96,7 @@ const LandingPage = () => {
               backgroundColor: 'rgba(255, 255, 255, 0.01)'
             }}
           >
-            <CardContent
-            >
+            <CardContent>
               <Stack direction="row" spacing={2}>
                 <Typography variant="p" color="text.secondary" gutterBottom>
                   {activeBackground.name}
@@ -121,10 +126,13 @@ const LandingPage = () => {
           </Card>
         </Grid>
         <Grid item width={'100%'} container direction="column">
-          <Typography variant="h2" color="text.secondary" maxWidth={'50%'} marginBottom={'2%'}>
-            {
-              'travel made cleaner.'
-            }
+          <Typography
+            variant="h2"
+            color="text.secondary"
+            maxWidth={'50%'}
+            marginBottom={'2%'}
+          >
+            {'travel made cleaner.'}
           </Typography>
           <Typography variant="h6" color="text.secondary" maxWidth={500}>
             {
@@ -149,28 +157,25 @@ const LandingPage = () => {
             {'Plan your trip'}
           </Button>
         </Grid>
-
       </Grid>
-          <div>
-            <Button
-              variant="outlined"
-              sx={{
-                minWidth: 200,
-                backdropFilter: 'blur(1px)',
-                backgroundColor: 'rgba(255, 255, 255, 0.01)',
-                borderRadius: '20px'
-              }}
-              endIcon={<div></div>}
-              onClick={() => {
-                const client = new AmadeusAPI();
-                //console.log(client.getTravelRecommendations('PAR'))
-              }}
-            >
-              {'Plan your trip'}
-            </Button>
-          </div>
-        </Stack>
-      </Stack>
+      <div>
+        <Button
+          variant="outlined"
+          sx={{
+            minWidth: 200,
+            backdropFilter: 'blur(1px)',
+            backgroundColor: 'rgba(255, 255, 255, 0.01)',
+            borderRadius: '20px'
+          }}
+          endIcon={<div></div>}
+          onClick={() => {
+            const client = new AmadeusAPI();
+            //console.log(client.getTravelRecommendations('PAR'))
+          }}
+        >
+          {'Plan your trip'}
+        </Button>
+      </div>
     </div>
   );
 };
