@@ -84,4 +84,27 @@ export default class AmadeusAPI {
       }
     });
   };
+
+  // Uses IATA table code
+  getHotels = (origin, destination, departureDate, adults) => {
+    return fetch(
+      `https://cors-anywhere.herokuapp.com/https://test.api.amadeus.com/v2/shopping/flight-offers
+        ?originLocationCode=${origin}&destinationLocationCode=${destination}
+        &departureDate=${departureDate}&adults=${adults}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${this.accessToken}`
+        }
+      }
+    ).then(async (res) => {
+      const resJson = await res.json();
+      if (resJson.status === 200) {
+        console.log(resJson);
+        return resJson;
+      } else {
+        throw resJson;
+      }
+    });
+  };
 }
