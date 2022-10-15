@@ -34,6 +34,7 @@ const LandingPage = () => {
       description: 'Stunning views of changing tides'
     },
     {
+<<<<<<< HEAD
       url: `../videos/pyramids.mp4`,
       fallback: `../videos/pyramids-fallback.jpeg`,
       name: 'Pyramids of Giza',
@@ -42,12 +43,28 @@ const LandingPage = () => {
       description: 'Explore an ancient wonder'
     },
     {
+=======
+>>>>>>> stage
       url: `../videos/mountain-range.mp4`,
       fallback: `../videos/mountain-range-fallback.jpeg`,
       name: 'Mount McKinley',
       location: 'Alaska, USA',
       carbonCost: '90kgCE',
       description: 'Beautiful scenery tucked away in the last frontier'
+    },
+    {
+      url: `../videos/night-sky.mp4`,
+      name: 'Yellowstone National Park',
+      location: 'Wyoming, USA',
+      carbonCost: '90kgCE',
+      description: 'America\'s first national park'
+    },
+    {
+      url: `../videos/white-mountains.mp4`,
+      name: 'White Mountains',
+      location: 'New Hampshire, USA',
+      carbonCost: '90kgCE',
+      description: 'Stunning fall foliage'
     }
   ];
 

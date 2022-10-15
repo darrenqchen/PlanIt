@@ -55,19 +55,19 @@ export default class ChooseApiClient {
     });
   };
 
-  getFlightPrintByDistance = (km, travelClass, passengers) => {
+  getFlightFootprintByDistance = (km, travelClass, passengers) => {
     return fetchGet(
       `https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/flights/distance?km=${km}&travelClass=${travelClass}&passengers=${passengers}`
     );
   };
 
-  getFlightPrintByRoute = (src, dst, travelClassType) => {
+  getFlightFootprintByRoute = (src, dst, travelClassType) => {
     return fetchGet(
       `https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/flights/icao/${src}/${dst}?travelClassType=${travelClassType}`
     );
   };
 
-  getPrintBySpecificFlightAndDate = (
+  getFootprintBySpecificFlightAndDate = (
     src,
     dst,
     flightnumber,

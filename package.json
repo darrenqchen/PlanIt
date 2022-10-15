@@ -15,7 +15,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.2",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "util": "^0.12.4",
     "web-vitals": "^2.1.4"
   },
@@ -45,6 +45,8 @@
     ]
   },
   "devDependencies": {
+    "@mui/x-date-pickers": "^5.0.4",
+    "dayjs": "^1.11.5",
     "eslint": "^8.25.0",
     "eslint-plugin-react": "^7.31.8",
     "husky": "^8.0.1",
