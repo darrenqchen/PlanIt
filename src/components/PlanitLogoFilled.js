@@ -4,8 +4,8 @@ const PlanitLogoFilled = () => {
   return (
     <div>
       <svg
-        width="414"
-        height="192"
+        width="310"
+        height="144"
         viewBox="0 0 414 192"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
