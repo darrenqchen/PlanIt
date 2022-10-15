@@ -63,24 +63,24 @@ const LandingPage = () => {
                 url(${activeBackground.url})`,
 
         backgroundSize: 'cover',
-        height: '100vh'
+        width: '100vw',
+        height: '100vh',
+        margin: 0,
+        padding: 0
       }}
     >
-      <Stack
-        paddingTop={'7%'}
-        paddingLeft={'10%'}
-        direction="row"
-        spacing={'45%'}
+      <Grid
+        container
+        direction="column"
+        justifyContent="space-between"
+        alignItems="stretch"
+        width={'100%'}
+        height={'100%'}
+        margin={'0%'}
+        padding={'10%'}
       >
-        <Stack alignItems="start" spacing={2}>
-          <PlanitLogoTextUnder />
-          <Typography variant="h5" color="text.secondary" maxWidth={500}>
-            {
-              'The only tool designed to plan your trip and minimize your carbon footprint at every step of your journey.'
-            }
-          </Typography>
-        </Stack>
-        <Stack alignItems="start" spacing="140%">
+        <Grid item width={'100%'} marginBottom={'2%'} container justifyContent="space-between">
+          <PlanitLogoFilled/>
           <Card
             sx={{
               minWidth: 200,
@@ -88,9 +88,10 @@ const LandingPage = () => {
               backgroundColor: 'rgba(255, 255, 255, 0.01)'
             }}
           >
-            <CardContent>
+            <CardContent
+            >
               <Stack direction="row" spacing={2}>
-                <Typography variant="h5" color="text.secondary" gutterBottom>
+                <Typography variant="p" color="text.secondary" gutterBottom>
                   {activeBackground.name}
                 </Typography>
                 <Divider
@@ -99,11 +100,11 @@ const LandingPage = () => {
                   color="primary.dark"
                   flexItem
                 />
-                <Typography variant="h5" color="text.secondary" gutterBottom>
+                <Typography variant="p" color="text.secondary" gutterBottom>
                   {activeBackground.location}
                 </Typography>
               </Stack>
-              <Typography variant="h6" color="text.secondary" component="div">
+              <Typography variant="p" color="text.secondary" component="div">
                 {activeBackground.description}
               </Typography>
             </CardContent>
@@ -116,22 +117,38 @@ const LandingPage = () => {
               </Typography>
             </CardActions>
           </Card>
-          <div>
-            <Button
-              variant="outlined"
-              sx={{
-                minWidth: 200,
-                backdropFilter: 'blur(1px)',
-                backgroundColor: 'rgba(255, 255, 255, 0.01)',
-                borderRadius: '20px'
-              }}
-              endIcon={<div></div>}
-            >
-              {'Plan your trip'}
-            </Button>
-          </div>
-        </Stack>
-      </Stack>
+        </Grid>
+        <Grid item width={'100%'} container direction="column">
+          <Typography variant="h2" color="text.secondary" maxWidth={'50%'} marginBottom={'2%'}>
+            {
+              'travel made cleaner.'
+            }
+          </Typography>
+          <Typography variant="h6" color="text.secondary" maxWidth={500}>
+            {
+              'The only tool designed to plan your trip and minimize your carbon footprint at every step of your journey.'
+            }
+          </Typography>
+        </Grid>
+        <Grid item container justifyContent="flex-end">
+          <Button
+            variant="outlined"
+            sx={{
+              minWidth: 250,
+              backdropFilter: 'blur(1px)',
+              color: 'rgba(255, 255, 255)',
+              backgroundColor: 'rgba(255, 255, 255, 0.01)',
+              borderColor: 'rgba(255, 255, 255)',
+              borderWidth: '1px',
+              borderRadius: '20px'
+            }}
+            endIcon={<div></div>}
+          >
+            {'Plan your trip'}
+          </Button>
+        </Grid>
+
+      </Grid>
     </div>
   );
 };
