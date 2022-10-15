@@ -16,6 +16,7 @@ import { borderRadius } from '@mui/system';
 import PlanitLogoFilled from './PlanitLogoFilled';
 import PlanitLogoOutlined from './PlanitLogoOutlined';
 import PlanitLogoTextUnder from './PlanitLogoTextUnder';
+import ChooseApiClient from '../apiClients/choooseApiClient';
 
 const LandingPage = () => {
   const [activeBackground, setActiveBackground] = useState({});
@@ -126,6 +127,9 @@ const LandingPage = () => {
                 borderRadius: '20px'
               }}
               endIcon={<div></div>}
+              onClick={() => {
+                const apiClient = new ChooseApiClient();
+              }}
             >
               {'Plan your trip'}
             </Button>
