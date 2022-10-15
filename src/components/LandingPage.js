@@ -16,13 +16,10 @@ import ModeOfTravelIcon from '@mui/icons-material/ModeOfTravel';
 import { useNavigate } from 'react-router-dom';
 
 import PlanitLogoFilled from './PlanitLogoFilled';
-import VideoBackground from './VideoBackground';
 import VideoParent from './VideoParent';
 
 
 const LandingPage = () => {
-  const videoRef = `../videos/waves.mp4`;
-
   const [activeBackground, setActiveBackground] = useState({});
   const [firstRender, setFirstRender] = useState(true);
   const navigate = useNavigate();
@@ -30,7 +27,7 @@ const LandingPage = () => {
   const potentialBackgrounds = [
     {
       url: `../videos/waves.mp4`,
-      fallback: "../paused.jpg",
+      fallback: `../videos/waves-fallback.jpeg`,
       name: 'Bay of Fundy',
       location: 'Canada',
       carbonCost: '120kgCE',
@@ -38,7 +35,7 @@ const LandingPage = () => {
     },
     {
       url: `../videos/pyramids.mp4`,
-      fallback: "../paused.jpg",
+      fallback: `../videos/pyramids-fallback.jpeg`,
       name: 'Pyramids of Giza',
       location: 'Egypt',
       carbonCost: '140kgCE',
@@ -46,7 +43,7 @@ const LandingPage = () => {
     },
     {
       url: `../videos/mountain-range.mp4`,
-      fallback: "../paused.jpg",
+      fallback: `../videos/mountain-range-fallback.jpeg`,
       name: 'Mount McKinley',
       location: 'Alaska, USA',
       carbonCost: '90kgCE',

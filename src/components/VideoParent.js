@@ -19,7 +19,7 @@ const VideoParent = ({ background, eco }) => {
     }
     else {
         return (
-            <img src={background.fallback}></img>
+            <img src={background.fallback} style={{width: '100%', height: '100%', objectFit: 'cover'}}></img>
         )
     }
     
