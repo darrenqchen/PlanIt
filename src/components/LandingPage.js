@@ -130,7 +130,7 @@ const LandingPage = () => {
               endIcon={<div></div>}
               onClick={() => {
                 const client = new AmadeusAPI()
-                //console.log(client.getTravelRecommendations('PAR'))
+                console.log(client.getTravelRecommendations('PAR'))
               }}
             >
               {'Plan your trip'}
