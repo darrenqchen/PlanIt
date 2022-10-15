@@ -79,7 +79,15 @@ export default class ChooseApiClient {
     return fetchGet(`https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/cars?km=${km}`)
   }
 
-  getCoachBusFootprint = (km) => {
-    return fetchGet(`https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/busses/coach`)
+  getCoachBusFootprint = (km, passengers) => {
+    return fetchGet(`https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/busses/coach?km=${km}&passengers=${passengers}`)
+  }
+
+  getTrainFootprint = (km, passengers) => {
+    return fetchGet(`https://partner-test.api.chooose.today/v1/footprint/trains?km=${km}&passengers=${passengers}`)
+  }
+
+  getHotelStayFootprint = (countryOrRegion, rooms, days) => {
+    return fetchGet(`https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/hotels/${countryOrRegion}?rooms=${rooms}&days=${days}`)
   }
 }
