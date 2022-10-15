@@ -25,6 +25,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import DriveEtaIcon from '@mui/icons-material/DriveEta';
 import DirectionsTransitIcon from '@mui/icons-material/DirectionsTransit';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
+import WOosMapApiClient from '../apiClients/woosmapApiClient';
 
 export default function InputPaper() {
   const [srcLoc, setSrcLoc] = useState('');
@@ -174,8 +175,18 @@ export default function InputPaper() {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => {
-              console.log('trying to run workflow');
+            onClick={async () => {
+              const woosmapClient = new WOosMapApiClient();
+
+              // get source and dest lat, long as dict {lat, long}
+              const srcLocality = await woosmapClient.getLocalityLocation(
+                'paris'
+              );
+              const dstLocality = await woosmapClient.getLocalityLocation(
+                'boston'
+              );
+              const scrCoords = srcLocality.localities[0].location;
+              const dstCoords = dstLocality.localities[0].location;
             }}
           >
             planit
