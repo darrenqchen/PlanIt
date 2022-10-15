@@ -78,7 +78,7 @@ export default function InputPaper() {
               <DesktopDatePicker
                 label="End Date"
                 inputFormat="MM/DD/YYYY"
-                value={startDate}
+                value={endDate}
                 onChange={(change) => {
                   setEndDate(change);
                 }}
@@ -166,7 +166,13 @@ export default function InputPaper() {
               <FlightTakeoffIcon color="primary.dark" />
             </ToggleButton>
           </ToggleButtonGroup>
-          <Button variant="contained" color="primary" onClick={runWorkflow()}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              console.log('trying to run workflow');
+            }}
+          >
             planit
           </Button>
         </Paper>
