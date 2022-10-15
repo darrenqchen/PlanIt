@@ -44,7 +44,10 @@ export default function InputPaper() {
         paddingBottom={2}
         sx={{ height: '100%' }}
       >
-        <Paper elevation={3} sx={{ height: '100%' }}>
+        <Paper
+          elevation={3}
+          sx={{ height: '100%', position: 'absolute', zIndex: 1, width: '22%' }}
+        >
           <Stack>
             <Typography paddingLeft={2} variant="h3">
               planit
