@@ -86,11 +86,9 @@ export default class AmadeusAPI {
   };
 
   // Uses IATA table code
-  getHotels = (origin, destination, departureDate, adults) => {
+  getHotels = (iataCode) => {
     return fetch(
-      `https://cors-anywhere.herokuapp.com/https://test.api.amadeus.com/v2/shopping/flight-offers
-        ?originLocationCode=${origin}&destinationLocationCode=${destination}
-        &departureDate=${departureDate}&adults=${adults}`,
+      `https://cors-anywhere.herokuapp.com/https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?cityCode=${iataCode}`,
       {
         method: 'GET',
         headers: {
