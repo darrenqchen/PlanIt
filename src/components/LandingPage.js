@@ -34,7 +34,6 @@ const LandingPage = () => {
       description: 'Stunning views of changing tides'
     },
     {
-<<<<<<< HEAD
       url: `../videos/pyramids.mp4`,
       fallback: `../videos/pyramids-fallback.jpeg`,
       name: 'Pyramids of Giza',
@@ -43,8 +42,6 @@ const LandingPage = () => {
       description: 'Explore an ancient wonder'
     },
     {
-=======
->>>>>>> stage
       url: `../videos/mountain-range.mp4`,
       fallback: `../videos/mountain-range-fallback.jpeg`,
       name: 'Mount McKinley',
