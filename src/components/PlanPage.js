@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  IconButton,
-  Stack,
-  Button,
-  Card,
-  CardContent,
-  CardActions,
-  Divider,
-  Grid
-} from '@mui/material';
+import { Stack } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
 import PlanitLogoFilled from './PlanitLogoFilled';
