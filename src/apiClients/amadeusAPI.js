@@ -25,6 +25,7 @@ export default class AmadeusAPI {
       }
     });
   };
+
   getTravelRecommendations = (cityCode) => {
     return fetch(
       `https://cors-anywhere.herokuapp.com/https://test.api.amadeus.com/v1/reference-data/recommended-locations?cityCodes=${cityCode}`,
@@ -44,6 +45,7 @@ export default class AmadeusAPI {
       }
     });
   };
+
   getPointsOfInterest = (north, south, east, west) => {
     return fetch(
       `https://cors-anywhere.herokuapp.com/https://test.api.amadeus.com/?north=${north}&west=${west}&south=${south}&east=${east}`,
@@ -63,6 +65,7 @@ export default class AmadeusAPI {
       }
     });
   };
+
   getFlights = (origin, destination, departureDate, adults) => {
     return fetch(
       `https://cors-anywhere.herokuapp.com/https://test.api.amadeus.com/v2/shopping/flight-offers
