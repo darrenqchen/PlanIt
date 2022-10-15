@@ -12,6 +12,7 @@ import {
 import Typography from '@mui/material/Typography';
 import ModeOfTravelIcon from '@mui/icons-material/ModeOfTravel';
 import { borderRadius } from '@mui/system';
+import { Link } from 'react-router-dom';
 
 import PlanitLogoFilled from './PlanitLogoFilled';
 import PlanitLogoOutlined from './PlanitLogoOutlined';
@@ -118,6 +119,8 @@ const LandingPage = () => {
           </Card>
           <div>
             <Button
+              component={Link}
+              to="/plan"
               variant="outlined"
               sx={{
                 minWidth: 200,
