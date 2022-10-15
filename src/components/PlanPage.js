@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 
 import PlanitLogoFilled from './PlanitLogoFilled';
 import WoosMap from './WoosMap';
+import InputPaper from './InputPaper';
 
 const PlanPage = () => {
   useEffect(() => {
@@ -11,10 +12,8 @@ const PlanPage = () => {
   });
 
   return (
-    <Stack>
-      <Typography color="primary">
-        This is the page meant for planning
-      </Typography>
+    <Stack minHeight={'100vh'}>
+      <InputPaper />
       <WoosMap />
     </Stack>
   );
