@@ -32,18 +32,25 @@ const LandingPage = () => {
       description: 'Stunning views of changing tides'
     },
     {
-      url: `../videos/pyramids.mp4`,
-      name: 'Pyramids of Giza',
-      location: 'Egypt',
-      carbonCost: '140kgCE',
-      description: 'Explore an ancient wonder'
-    },
-    {
       url: `../videos/mountain-range.mp4`,
       name: 'Mount McKinley',
       location: 'Alaska, USA',
       carbonCost: '90kgCE',
       description: 'Beautiful scenery tucked away in the last frontier'
+    },
+    {
+      url: `../videos/night-sky.mp4`,
+      name: 'Yellowstone National Park',
+      location: 'Wyoming, USA',
+      carbonCost: '90kgCE',
+      description: 'America\'s first national park'
+    },
+    {
+      url: `../videos/white-mountains.mp4`,
+      name: 'White Mountains',
+      location: 'New Hampshire, USA',
+      carbonCost: '90kgCE',
+      description: 'Stunning fall foliage'
     }
   ];
 
