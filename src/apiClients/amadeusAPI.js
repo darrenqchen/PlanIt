@@ -84,4 +84,25 @@ export default class AmadeusAPI {
       }
     });
   };
+
+  // Uses IATA table code
+  getHotels = (iataCode) => {
+    return fetch(
+      `https://cors-anywhere.herokuapp.com/https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?cityCode=${iataCode}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${this.accessToken}`
+        }
+      }
+    ).then(async (res) => {
+      const resJson = await res.json();
+      if (resJson.status === 200) {
+        console.log(resJson);
+        return resJson;
+      } else {
+        throw resJson;
+      }
+    });
+  };
 }
