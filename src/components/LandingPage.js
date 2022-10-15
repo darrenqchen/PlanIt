@@ -11,14 +11,8 @@ import {
 } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import ModeOfTravelIcon from '@mui/icons-material/ModeOfTravel';
-import { borderRadius } from '@mui/system';
-import { Link } from 'react-router-dom';
 
 import PlanitLogoFilled from './PlanitLogoFilled';
-import PlanitLogoOutlined from './PlanitLogoOutlined';
-import PlanitLogoTextUnder from './PlanitLogoTextUnder';
-import ChooseApiClient from '../amadeusAPI';
-import AmadeusAPI from '../amadeusAPI';
 
 const LandingPage = () => {
   const [activeBackground, setActiveBackground] = useState({});

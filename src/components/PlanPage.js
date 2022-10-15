@@ -15,7 +15,7 @@ const PlanPage = () => {
       <Typography color="primary">
         This is the page meant for planning
       </Typography>
-      <WoosMap></WoosMap>
+      <WoosMap />
     </Stack>
   );
 };
