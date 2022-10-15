@@ -42,52 +42,83 @@ export default class ChooseApiClient {
     return fetch(url, {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${this.accessToken}`
-      },
-    }).then((async (res) => {
-      const resJson = await res.json()
-      if (resJson.status === 200) {
-        console.log(resJson)
-        return resJson
-      } else {
-        throw resJson
+        Authorization: `Bearer ${this.accessToken}`
       }
-    }))
-  }
+    }).then(async (res) => {
+      const resJson = await res.json();
+      if (resJson.status === 200) {
+        console.log(resJson);
+        return resJson;
+      } else {
+        throw resJson;
+      }
+    });
+  };
 
-  getFlightPrintByDistance = (km, travelClass, passengers ) => {
-    return fetchGet(`https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/flights/distance?km=${km}&travelClass=${travelClass}&passengers=${passengers}`)
-  }
+  getFlightPrintByDistance = (km, travelClass, passengers) => {
+    return fetchGet(
+      `https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/flights/distance?km=${km}&travelClass=${travelClass}&passengers=${passengers}`
+    );
+  };
 
   getFlightPrintByRoute = (src, dst, travelClassType) => {
-    return fetchGet(`https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/flights/icao/${src}/${dst}?travelClassType=${travelClassType}`)
-  }
+    return fetchGet(
+      `https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/flights/icao/${src}/${dst}?travelClassType=${travelClassType}`
+    );
+  };
 
-  getPrintBySpecificFlightAndDate = (src, dst, flightnumber, date, travelClass, passengers) => {
-    return fetchGet(`https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/flights/${src}/${dst}/${flightnumber}/${date}?travelClass=${travelClass}&passengers=${passengers}`)
-  }
+  getPrintBySpecificFlightAndDate = (
+    src,
+    dst,
+    flightnumber,
+    date,
+    travelClass,
+    passengers
+  ) => {
+    return fetchGet(
+      `https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/flights/${src}/${dst}/${flightnumber}/${date}?travelClass=${travelClass}&passengers=${passengers}`
+    );
+  };
 
-  getPrintBySpecificFlight = (src, dst, flightnumber, travelClass, passengers) => {
-    return fetchGet(`https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/flights/${src}/${dst}/${flightnumber}?travelClass=${travelClass}&passengers=${passengers}`)
-  }
+  getPrintBySpecificFlight = (
+    src,
+    dst,
+    flightnumber,
+    travelClass,
+    passengers
+  ) => {
+    return fetchGet(
+      `https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/flights/${src}/${dst}/${flightnumber}?travelClass=${travelClass}&passengers=${passengers}`
+    );
+  };
 
   getCargoPrintBySpecificFlight = (src, dst, flightnumber, cargoKilos) => {
-    return fetchGet(`https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/flights/${src}/${dst}/${flightnumber}/?cargoKilos=${cargoKilos}`)
-  }
+    return fetchGet(
+      `https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/flights/${src}/${dst}/${flightnumber}/?cargoKilos=${cargoKilos}`
+    );
+  };
 
   getCarFootprint = (km) => {
-    return fetchGet(`https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/cars?km=${km}`)
-  }
+    return fetchGet(
+      `https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/cars?km=${km}`
+    );
+  };
 
   getCoachBusFootprint = (km, passengers) => {
-    return fetchGet(`https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/busses/coach?km=${km}&passengers=${passengers}`)
-  }
+    return fetchGet(
+      `https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/busses/coach?km=${km}&passengers=${passengers}`
+    );
+  };
 
   getTrainFootprint = (km, passengers) => {
-    return fetchGet(`https://partner-test.api.chooose.today/v1/footprint/trains?km=${km}&passengers=${passengers}`)
-  }
+    return fetchGet(
+      `https://partner-test.api.chooose.today/v1/footprint/trains?km=${km}&passengers=${passengers}`
+    );
+  };
 
   getHotelStayFootprint = (countryOrRegion, rooms, days) => {
-    return fetchGet(`https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/hotels/${countryOrRegion}?rooms=${rooms}&days=${days}`)
-  }
+    return fetchGet(
+      `https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/hotels/${countryOrRegion}?rooms=${rooms}&days=${days}`
+    );
+  };
 }

@@ -11,17 +11,17 @@ import {
 } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import ModeOfTravelIcon from '@mui/icons-material/ModeOfTravel';
-import { borderRadius } from '@mui/system';
+import { useNavigate } from 'react-router-dom';
 
 import PlanitLogoFilled from './PlanitLogoFilled';
 import VideoBackground from './VideoBackground';
-
 
 const LandingPage = () => {
   const videoRef = `../videos/waves.mp4`
 
   const [activeBackground, setActiveBackground] = useState({});
   const [firstRender, setFirstRender] = useState(true);
+  const navigate = useNavigate();
   const potentialBackgrounds = [
     {
       url: `../videos/waves.mp4`,
@@ -171,6 +171,9 @@ const LandingPage = () => {
               borderRadius: '20px'
             }}
             endIcon={<div></div>}
+            onClick={() => {
+              navigate('/plan');
+            }}
           >
             {'Plan your trip'}
           </Button>
