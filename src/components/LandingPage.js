@@ -18,8 +18,6 @@ import PlanitLogoFilled from './PlanitLogoFilled';
 import VideoBackground from './VideoBackground';
 
 const LandingPage = () => {
-  const videoRef = `../videos/waves.mp4`;
-
   const [activeBackground, setActiveBackground] = useState({});
   const [firstRender, setFirstRender] = useState(true);
   const navigate = useNavigate();
