@@ -85,11 +85,13 @@ export default function InputPaper() {
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
-            <Select
+            <TextField
               value={numTravelers}
               onChange={(event) => {
                 setNumTravelers(event.target.value);
               }}
+              select
+              label="Number of Travellers"
             >
               <MenuItem value={1}>1</MenuItem>
               <MenuItem value={2}>2</MenuItem>
@@ -101,7 +103,7 @@ export default function InputPaper() {
               <MenuItem value={8}>8</MenuItem>
               <MenuItem value={9}>9</MenuItem>
               <MenuItem value={10}>10</MenuItem>
-            </Select>
+            </TextField>
             <Stack
               sx={{ height: 100, paddingTop: 2, paddingLeft: 2 }}
               spacing={5}
