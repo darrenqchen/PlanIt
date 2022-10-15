@@ -11,12 +11,14 @@ import {
 } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import ModeOfTravelIcon from '@mui/icons-material/ModeOfTravel';
+import { useNavigate } from 'react-router-dom';
 
 import PlanitLogoFilled from './PlanitLogoFilled';
 
 const LandingPage = () => {
   const [activeBackground, setActiveBackground] = useState({});
   const [firstRender, setFirstRender] = useState(true);
+  const navigate = useNavigate();
   const potentialBackgrounds = [
     {
       url: '/chichenitza.jpg',
@@ -148,6 +150,9 @@ const LandingPage = () => {
               borderRadius: '20px'
             }}
             endIcon={<div></div>}
+            onClick={() => {
+              navigate('/plan');
+            }}
           >
             {'Plan your trip'}
           </Button>
