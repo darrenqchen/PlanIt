@@ -1,0 +1,5 @@
+def main():
+    with open("src\woosmapPython\poi.csv", "r") as f:
+        print(f.read())
+
+main()
