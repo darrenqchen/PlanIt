@@ -158,24 +158,6 @@ const LandingPage = () => {
           </Button>
         </Grid>
       </Grid>
-      <div>
-        <Button
-          variant="outlined"
-          sx={{
-            minWidth: 200,
-            backdropFilter: 'blur(1px)',
-            backgroundColor: 'rgba(255, 255, 255, 0.01)',
-            borderRadius: '20px'
-          }}
-          endIcon={<div></div>}
-          onClick={() => {
-            const client = new AmadeusAPI();
-            //console.log(client.getTravelRecommendations('PAR'))
-          }}
-        >
-          {'Plan your trip'}
-        </Button>
-      </div>
     </div>
   );
 };
