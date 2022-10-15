@@ -5,7 +5,7 @@ import time
 import requests
 from hashlib import sha1
 
-YOUR_INPUT_CSV_FILE = 'src/hotelsStuff/bostonhotels.csv'
+YOUR_INPUT_CSV_FILE = 'src/woosmapPython/BOS_PAR_hotels.csv'
 WOOSMAP_PRIVATE_API_KEY = '8bfa08f1-2962-457a-89a5-818a97a24f20'
 BATCH_SIZE = 5
 
