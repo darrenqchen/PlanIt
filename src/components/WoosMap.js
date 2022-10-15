@@ -10,7 +10,7 @@ const Map = () => {
   const woosmapLoaded = useScript(conf.woosmapMapJSUrl);
 
   useEffect(() => {
-    if (woosmapLoaded) {
+    if (woosmapLoaded && !map) {
       setMap(initMap());
     }
   }, [woosmapLoaded]);

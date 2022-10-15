@@ -13,6 +13,10 @@ export default function useScript(src) {
           setLoaded(true);
         };
         document.body.appendChild(script);
+      } else if (!window.woosmap) {
+        script.onload = function () {
+          setLoaded(true);
+        };
       } else {
         setLoaded(true);
       }
