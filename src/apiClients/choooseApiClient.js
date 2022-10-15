@@ -36,4 +36,50 @@ export default class ChooseApiClient {
       }
     });
   };
+
+  // abstracts out the GET
+  fetchGet = (url) => {
+    return fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${this.accessToken}`
+      },
+    }).then((async (res) => {
+      const resJson = await res.json()
+      if (resJson.status === 200) {
+        console.log(resJson)
+        return resJson
+      } else {
+        throw resJson
+      }
+    }))
+  }
+
+  getFlightPrintByDistance = (km, travelClass, passengers ) => {
+    return fetchGet(`https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/flights/distance?km=${km}&travelClass=${travelClass}&passengers=${passengers}`)
+  }
+
+  getFlightPrintByRoute = (src, dst, travelClassType) => {
+    return fetchGet(`https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/flights/icao/${src}/${dst}?travelClassType=${travelClassType}`)
+  }
+
+  getPrintBySpecificFlightAndDate = (src, dst, flightnumber, date, travelClass, passengers) => {
+    return fetchGet(`https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/flights/${src}/${dst}/${flightnumber}/${date}?travelClass=${travelClass}&passengers=${passengers}`)
+  }
+
+  getPrintBySpecificFlight = (src, dst, flightnumber, travelClass, passengers) => {
+    return fetchGet(`https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/flights/${src}/${dst}/${flightnumber}?travelClass=${travelClass}&passengers=${passengers}`)
+  }
+
+  getCargoPrintBySpecificFlight = (src, dst, flightnumber, cargoKilos) => {
+    return fetchGet(`https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/flights/${src}/${dst}/${flightnumber}/?cargoKilos=${cargoKilos}`)
+  }
+
+  getCarFootprint = (km) => {
+    return fetchGet(`https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/cars?km=${km}`)
+  }
+
+  getCoachBusFootprint = (km) => {
+    return fetchGet(`https://cors-anywhere.herokuapp.com/https://partner-test.api.chooose.today/v1/footprint/busses/coach`)
+  }
 }
