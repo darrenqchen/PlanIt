@@ -18,7 +18,6 @@ import { useNavigate } from 'react-router-dom';
 import PlanitLogoFilled from './PlanitLogoFilled';
 import VideoParent from './VideoParent';
 
-
 const LandingPage = () => {
   const [activeBackground, setActiveBackground] = useState({});
   const [firstRender, setFirstRender] = useState(true);
@@ -47,7 +46,7 @@ const LandingPage = () => {
       name: 'Yellowstone National Park',
       location: 'Wyoming, USA',
       carbonCost: '90kgCE',
-      description: 'America\'s first national park'
+      description: "America's first national park"
     },
     {
       url: `../videos/white-mountains.mp4`,
@@ -90,9 +89,9 @@ const LandingPage = () => {
           position: 'absolute'
         }}
       >
-        <VideoParent 
-          background = {activeBackground}
-          eco = {ecoToggle}
+        <VideoParent
+          background={activeBackground}
+          eco={ecoToggle}
         ></VideoParent>
       </div>
       <Grid
@@ -108,7 +107,11 @@ const LandingPage = () => {
         zIndex={1}
         backgroundColor="rgba(0, 0, 0, 0.375)"
       >
-        <Switch onClick={() => {setEcoToggle(!ecoToggle)}}/>
+        <Switch
+          onClick={() => {
+            setEcoToggle(!ecoToggle);
+          }}
+        />
         <Grid
           item
           width={'100%'}

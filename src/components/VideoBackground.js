@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+import React from 'react';
 
 const VideoBackground = ({ videoRef }) => {
-
   return (
     <video
       width={'100%'}
@@ -10,12 +9,12 @@ const VideoBackground = ({ videoRef }) => {
       src={videoRef}
       autoPlay
       loop
-      muted 
+      muted
       style={{
-        objectFit: "cover"
+        objectFit: 'cover'
       }}
     />
-  )
-}
+  );
+};
 
-export default VideoBackground
+export default VideoBackground;

@@ -7,9 +7,7 @@ import WoosMap from './WoosMap';
 import InputPaper from './InputPaper';
 
 const PlanPage = () => {
-  useEffect(() => {
-    console.log('rendered');
-  });
+  useEffect(() => {});
 
   return (
     <Stack minHeight={'100vh'}>
