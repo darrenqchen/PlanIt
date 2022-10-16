@@ -2,7 +2,7 @@
     display: inline-block;
     position: absolute;
     top: 10vh;
-    left: 125vh;
+    left: 52%;
     margin: 0px;
     padding: 50px;
     border-radius: 4px;
@@ -15,8 +15,8 @@
 .itinerary {
     display: inline-block;
     position: absolute;
-    top: 0vh;
-    left: 50vh;
+    top: 3.5vh;
+    left: 29.5%;
     margin: 0px;
     padding: 100px;
     background-color: #FFF;
@@ -30,8 +30,8 @@
 .showItinerary {
     display: inline-block;
     position: absolute;
-    top: 5vh;
-    left: 30vh;
+    top: 7.5%;
+    left: 26.5%;
     margin: 0px;
     padding: 0px;
 
