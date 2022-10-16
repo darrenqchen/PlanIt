@@ -103,9 +103,6 @@ const Map = () => {
     <div className="mapContainer">
       <div ref={mapContainerRef} />
       <div />
-      {() => {
-        if (showInfo) {
-          return (
             <Infobox
               showbox={showInfo}
               setshowbox={setShowInfo}
@@ -114,9 +111,6 @@ const Map = () => {
               value={itinerary}
               set={setItinerary}
             ></Infobox>
-          );
-        }
-      }}
       <Icon className="showItinerary">
         <FormatListBulletedIcon
           onClick={() => {

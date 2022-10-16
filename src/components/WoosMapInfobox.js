@@ -7,7 +7,7 @@ import { Button, Typography, Stack, Paper } from '@mui/material';
 import '../styles/InfoBox.css';
 
 const Infobox = ({ showbox, setshowbox, poitype, poi, value, set }) => {
-  if (!poi) {
+  if (!poi || !showbox) {
     return <div></div>;
   } else {
     return (
