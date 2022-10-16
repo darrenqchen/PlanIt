@@ -9,6 +9,11 @@ import Infobox from './WoosMapInfobox';
 import { Button, Icon, Stack, Typography, Paper } from '@mui/material';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 
+
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+
+
 const Map = () => {
   const mapContainerRef = useRef(null);
   const [map, setMap] = useState(null);
@@ -17,6 +22,8 @@ const Map = () => {
   const [itinerary, setItinerary] = useState([]);
   const [showItinerary, setShowItinerary] = useState(false);
   const [poiType, setPoiType] = useState(null);
+  const [showInfo, setShowInfo] = useState(true);
+
 
   useEffect(() => {
     if (woosmapLoaded && !map) {
@@ -75,6 +82,7 @@ const Map = () => {
       setSelectedPOI(event.feature.getProperty('name'));
       setPoiType(event.feature.getProperty('type'));
       //console.log(event.feature.getProperty("type"))
+      setShowInfo(true);
     });
   };
 
@@ -112,12 +120,15 @@ const Map = () => {
     <div className="mapContainer">
       <div ref={mapContainerRef} />
       <div />
-      <Infobox
-        poitype={poiType}
-        poi={selectedPOI}
-        value={itinerary}
-        set={setItinerary}
-      ></Infobox>
+
+            <Infobox
+              showbox={showInfo}
+              setshowbox={setShowInfo}
+              poitype={poiType}
+              poi={selectedPOI}
+              value={itinerary}
+              set={setItinerary}
+            ></Infobox>
       <Icon className="showItinerary">
         <FormatListBulletedIcon
           onClick={() => {
