@@ -4,13 +4,12 @@
     top: 10vh;
     left: 125vh;
     margin: 0px;
-    padding: 100px;
-    background-color: #FFF;
+    padding: 50px;
     border-radius: 4px;
     color: #1d1d1d;
     z-index: 2;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    max-width: 400px;
+    max-width: 300px;
 }
 
 .itinerary {
@@ -39,6 +38,10 @@
     border-radius: 4px;
     color: #1d1d1d;
     z-index: 2;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+
     max-width: 400px;
 }
+
+.showItinerary:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
