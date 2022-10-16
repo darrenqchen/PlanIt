@@ -6,12 +6,24 @@ import '../styles/Map.css';
 import poi from "../woosmapPython/poi.json"
 import hotels from "../woosmapPython/hotels_poi.json"
 import Infobox from './WoosMapInfobox';
+import {
+  Button,
+  Icon,
+  Stack,
+  Typography,
+  Paper
+} from '@mui/material';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+
 
 const Map = () => {
   const mapContainerRef = useRef(null);
   const [map, setMap] = useState(null);
   const woosmapLoaded = useScript(conf.woosmapMapJSUrl);
   const [selectedPOI, setSelectedPOI] = useState(null)
+  const [itinerary, setItinerary] = useState([])
+  const [showItinerary, setShowItinerary] = useState(false)
+  const [poiType, setPoiType] = useState(null)
 
   useEffect(() => {
     if (woosmapLoaded && !map) {
@@ -31,7 +43,7 @@ const Map = () => {
           lat: data.latitude,
           lng: data.longitude
         }),
-        properties: { name: data.data__name}
+        properties: { name: data.data__name, type: 'poi'}
       });
     });
     hotels.hotels.forEach((data) => {
@@ -40,7 +52,7 @@ const Map = () => {
           lat: data.Latitude,
           lng: data.Longitude
         }),
-        properties: { name: data.Name}
+        properties: { name: data.Name, type: 'hotel'}
       });
     });
 
@@ -68,21 +80,40 @@ const Map = () => {
       // ).innerHTML = `<strong>${event.feature.getProperty("name")}</strong>`;
       event.feature.setProperty("highlighted", true);
       highlightedFeatureId = event.feature.id;
-      console.log(event.feature.getProperty("name"))
-      //setSelectedPOI(event.feature.getProperty("name"))
-      if (event.feature.getProperty("name")) {
-        setSelectedPOI(event.feature.getProperty("name"))
-      }
-      
+      setSelectedPOI(event.feature.getProperty("name"))
+      setPoiType(event.feature.getProperty("type"))
+      //console.log(event.feature.getProperty("type"))
     });
 
+  }
+
+  function makeItinerary() {
+    if (showItinerary) {
+      return (
+        <Paper className='itinerary'>
+          <Stack>
+          {itinerary.map((element) => {return (<Typography key ="">{element}</Typography>);})}
+          </Stack>
+          <Button onClick={() => {setItinerary([])}}>Clear</Button>
+          <Button onClick={() => {setShowItinerary(false)}}>Hide</Button>
+        </Paper>
+      )
+    }
+    else {
+      return <div></div>
+    }
   }
 
   return (
     <div className="mapContainer">
       <div ref={mapContainerRef} />
       <div />
-      <Infobox poi={selectedPOI}></Infobox>
+      <Infobox poitype={poiType} poi={selectedPOI} value={itinerary} set={setItinerary}></Infobox>
+      <Icon className='showItinerary'>
+       <FormatListBulletedIcon onClick={() => {setShowItinerary(!showItinerary)}}>
+       </FormatListBulletedIcon>
+      </Icon> 
+      {makeItinerary()}
     </div>
   );
 };
