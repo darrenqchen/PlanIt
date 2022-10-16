@@ -9,8 +9,10 @@ import Infobox from './WoosMapInfobox';
 import { Button, Icon, Stack, Typography, Paper } from '@mui/material';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 
+
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+
 
 const Map = () => {
   const mapContainerRef = useRef(null);
@@ -21,6 +23,7 @@ const Map = () => {
   const [showItinerary, setShowItinerary] = useState(false);
   const [poiType, setPoiType] = useState(null);
   const [showInfo, setShowInfo] = useState(true);
+
 
   useEffect(() => {
     if (woosmapLoaded && !map) {
@@ -86,12 +89,26 @@ const Map = () => {
   function makeItinerary() {
     if (showItinerary) {
       return (
-        <Paper className='itinerary'>
+        <Paper className="itinerary">
           <Stack>
-          {itinerary.map((element) => {return (<Typography key ="">{element}</Typography>);})}
+            {itinerary.map((element) => {
+              return <Typography key="">{element}</Typography>;
+            })}
           </Stack>
-          <Button onClick={() => {setItinerary([])}}>Clear</Button>
-          <Button onClick={() => {setShowItinerary(false)}}>Hide</Button>
+          <Button
+            onClick={() => {
+              setItinerary([]);
+            }}
+          >
+            Clear
+          </Button>
+          <Button
+            onClick={() => {
+              setShowItinerary(false);
+            }}
+          >
+            Hide
+          </Button>
         </Paper>
       );
     } else {
@@ -103,6 +120,7 @@ const Map = () => {
     <div className="mapContainer">
       <div ref={mapContainerRef} />
       <div />
+
             <Infobox
               showbox={showInfo}
               setshowbox={setShowInfo}

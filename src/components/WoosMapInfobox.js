@@ -6,6 +6,7 @@ import { Button, Typography, Stack, Paper } from '@mui/material';
 
 import '../styles/InfoBox.css';
 
+
 const Infobox = ({ showbox, setshowbox, poitype, poi, value, set }) => {
   if (!poi || !showbox) {
     return <div></div>;
@@ -15,6 +16,7 @@ const Infobox = ({ showbox, setshowbox, poitype, poi, value, set }) => {
         className="infoBox"
         id={`infobox-${poi}`}
       >
+
         <Stack>
           <Typography variant="h4">{poi}</Typography>
           <Button
@@ -24,9 +26,11 @@ const Infobox = ({ showbox, setshowbox, poitype, poi, value, set }) => {
           >
             <Typography>Add to itinerary</Typography>
           </Button>
+
           <Button onClick={() => {setshowbox(false)}}>
             <Typography>Close</Typography>
           </Button>
+
         </Stack>
       </Paper>
     );

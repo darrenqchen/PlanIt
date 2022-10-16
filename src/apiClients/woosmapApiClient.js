@@ -3,15 +3,10 @@ const publicKey = 'woos-bbefc515-9121-3c19-866a-1d63ab476604';
 
 const components = [];
 
-export default class WOosMapApiClient {
-  constructor() {
-    console.log('created');
-  }
-
+export default class WoosMapApiClient {
   getLocalityLocation = (localityName) => {
-    console.log(localityName);
     return fetch(
-      `https://cors-anywhere.herokuapp.com/https://api.woosmap.com/localities/autocomplete/?input=${localityName}&components=country:fr|country:us&key=${publicKey}`,
+      `https://api.woosmap.com/localities/autocomplete/?input=${localityName}&components=country:fr|country:us&key=${publicKey}`,
       {
         method: 'GET',
         redirect: 'follow'
@@ -19,6 +14,23 @@ export default class WOosMapApiClient {
     ).then(async (res) => {
       const resJson = await res.json();
       if (resJson.localities) {
+        return resJson;
+      } else {
+        throw resJson;
+      }
+    });
+  };
+
+  getDistanceByLatLong = (slat, slong, dlat, dlong) => {
+    return fetch(
+      `https://api.woosmap.com/distance/distancematrix/json?origins=${slat},${slong}&destinations=${dlat},${dlong}&key=${publicKey}`,
+      {
+        method: 'GET',
+        redirect: 'follow'
+      }
+    ).then(async (res) => {
+      const resJson = await res.json();
+      if (resJson.status === 'OK') {
         return resJson;
       } else {
         throw resJson;
