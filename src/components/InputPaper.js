@@ -344,14 +344,14 @@ export default function InputPaper() {
                       };
                     });
 
-                    console.log(minData);
-
                     const graph = new Graph(
                       minData,
                       userTime,
                       userCarbon,
                       userDollars
                     );
+
+                    setRoutes([graph.getReturnJson(), ...routes]);
 
                     setRouteData(true);
                   }}

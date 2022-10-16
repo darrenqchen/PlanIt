@@ -18,10 +18,6 @@ export default class Graph {
   initGraph = (minData, userTime, userCarbon, userDollars) => {
     const chooseApiClient = new ChoooseApiClient();
     const ugraph = {};
-    const egraph = {};
-    const tgraph = {};
-    const pgraph = {};
-    console.log(minData);
     minData.forEach(async (flight) => {
       const flightPricePerLeg = Number(flight.price) / flight.links.length;
       const flightTimePerLeg = Number(flight.time) / flight.links.length;
@@ -50,9 +46,15 @@ export default class Graph {
         railTimePerLeg * (userTime / 100) +
         railPricePerLeg * (userDollars / 100);
 
-      console.log(flight);
-      const start = flight.links.departure;
+      this.emissions = flightEmissionsPerLeg;
+      this.time = flightTimePerLeg;
+      this.cost = flightPricePerLeg;
+
+      const start = flight.links[0].departure;
+      const end = flight.links[flight.links.length - 1].arrival;
       ugraph['start'] = start;
+      ugraph[`${end}`] = {};
+      ugraph['finish'] = end;
       flight.links.map((links) => {
         const arrival = links.arrival;
         ugraph[links.departure] = {};
@@ -61,8 +63,37 @@ export default class Graph {
           carUserEdge,
           railUserEdge
         );
-        console.log(ugraph);
       });
     });
+    this.ugraph = ugraph;
+  };
+
+  graphPath = () => {
+    try {
+      const visited = [];
+      let startN = this.ugraph['start'];
+      const history = [];
+      while (!visited.includes(this.ugraph['finish'])) {
+        const minA = [];
+        Object.keys(this.ugraph[startN]).forEach((ele) => {
+          minA.push(this.ugraph[ele]);
+          visited.push(ele);
+        });
+        history.push(startN);
+        startN = visited[minA.indexOf(Math.min(minA))];
+        return visited;
+      }
+    } catch (err) {
+      return Object.keys(this.ugraph);
+    }
+  };
+
+  getReturnJson = () => {
+    return {
+      links: this.graphPath(),
+      carbon: this.emissions,
+      cost: this.cost,
+      time: this.time
+    };
   };
 }
