@@ -8,7 +8,7 @@ import {
 
 import '../styles/InfoBox.css';
 
-const Infobox = ({poi}) => {
+const Infobox = ({poi, value, set}) => {
     if (!poi) {
         return (<div></div>);
     }
@@ -16,8 +16,10 @@ const Infobox = ({poi}) => {
         return (
             <div className='infoBox' id={`infobox-${poi}`}>
                 {poi}
-                <Button>
-                    Add to itinerary
+                <Button onClick={() => {
+                    set(value => [...value, poi])
+                    }}>
+                Add to itinerary 
                 </Button>
             </div>
         );

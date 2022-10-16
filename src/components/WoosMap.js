@@ -6,12 +6,20 @@ import '../styles/Map.css';
 import poi from "../woosmapPython/poi.json"
 import hotels from "../woosmapPython/hotels_poi.json"
 import Infobox from './WoosMapInfobox';
+import {
+  Button,
+  Icon
+} from '@mui/material';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+
 
 const Map = () => {
   const mapContainerRef = useRef(null);
   const [map, setMap] = useState(null);
   const woosmapLoaded = useScript(conf.woosmapMapJSUrl);
   const [selectedPOI, setSelectedPOI] = useState(null)
+  const [itinerary, setItinerary] = useState([])
+  const [showItinerary, setShowItinerary] = useState(true)
 
   useEffect(() => {
     if (woosmapLoaded && !map) {
@@ -78,11 +86,31 @@ const Map = () => {
 
   }
 
+  function makeItinerary() {
+    if (showItinerary) {
+      return (
+        <div className='itinerary'>
+          <ul>{itinerary}</ul>
+          <Button onClick={() => {setItinerary([])}}>Clear</Button>
+          <Button onClick={() => {setShowItinerary(false)}}>Hide</Button>
+        </div>
+      )
+    }
+    else {
+      return <div></div>
+    }
+  }
+
   return (
     <div className="mapContainer">
       <div ref={mapContainerRef} />
       <div />
-      <Infobox poi={selectedPOI}></Infobox>
+      <Infobox poi={selectedPOI} value={itinerary} set={setItinerary}></Infobox>
+      <Icon className='showItinerary'>
+       <FormatListBulletedIcon onClick={() => {setShowItinerary(!showItinerary)}}>
+       </FormatListBulletedIcon>
+      </Icon> 
+      {makeItinerary()}
     </div>
   );
 };

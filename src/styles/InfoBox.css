@@ -12,3 +12,33 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     max-width: 400px;
 }
+
+.itinerary {
+    display: inline-block;
+    position: absolute;
+    top: 0vh;
+    left: 50vh;
+    margin: 0px;
+    padding: 100px;
+    background-color: #FFF;
+    border-radius: 4px;
+    color: #1d1d1d;
+    z-index: 2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+}
+
+.showItinerary {
+    display: inline-block;
+    position: absolute;
+    top: 5vh;
+    left: 30vh;
+    margin: 0px;
+    padding: 0px;
+
+    border-radius: 4px;
+    color: #1d1d1d;
+    z-index: 2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+}
