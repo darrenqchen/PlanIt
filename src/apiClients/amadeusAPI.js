@@ -6,20 +6,16 @@ const benSecret = 'HyzdsGP59q32cySg';
 export default class AmadeusAPI {
   constructor(accessToken) {
     this.accessToken = accessToken;
-    console.log(this.accessToken);
   }
 
   static getAccessToken = async () => {
-    return fetch(
-      'https://cors-anywhere.herokuapp.com/https://test.api.amadeus.com/v1/security/oauth2/token',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: `grant_type=client_credentials&client_id=${benId}&client_secret=${benSecret}`
-      }
-    ).then(async (res) => {
+    return fetch('https://test.api.amadeus.com/v1/security/oauth2/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: `grant_type=client_credentials&client_id=${shashId}&client_secret=${shashSecret}`
+    }).then(async (res) => {
       const resJson = await res.json();
       if (resJson.state === 'approved') {
         return resJson.access_token;
@@ -31,7 +27,7 @@ export default class AmadeusAPI {
 
   getTravelRecommendations = (cityCode) => {
     return fetch(
-      `https://cors-anywhere.herokuapp.com/https://test.api.amadeus.com/v1/reference-data/recommended-locations?cityCodes=${cityCode}`,
+      `https://test.api.amadeus.com/v1/reference-data/recommended-locations?cityCodes=${cityCode}`,
       {
         method: 'GET',
         headers: {
@@ -50,7 +46,7 @@ export default class AmadeusAPI {
 
   getNearestAirportByCoords = (lat, long) => {
     return fetch(
-      `https://cors-anywhere.herokuapp.com/https://test.api.amadeus.com/v1/reference-data/locations/airports?latitude=${lat}&longitude=${long}`,
+      `https://test.api.amadeus.com/v1/reference-data/locations/airports?latitude=${lat}&longitude=${long}`,
       {
         method: 'GET',
         headers: {
@@ -59,7 +55,6 @@ export default class AmadeusAPI {
       }
     ).then(async (res) => {
       const resJson = await res.json();
-      console.log(resJson);
       return resJson;
     });
   };
@@ -736,7 +731,7 @@ export default class AmadeusAPI {
 
   getPointsOfInterest = (north, south, east, west) => {
     return fetch(
-      `https://cors-anywhere.herokuapp.com/https://test.api.amadeus.com/?north=${north}&west=${west}&south=${south}&east=${east}`,
+      `https://test.api.amadeus.com/?north=${north}&west=${west}&south=${south}&east=${east}`,
       {
         method: 'GET',
         headers: {
@@ -755,7 +750,7 @@ export default class AmadeusAPI {
 
   getFlights = (origin, destination, departureDate, adults) => {
     return fetch(
-      `https://cors-anywhere.herokuapp.com/https://test.api.amadeus.com/v2/shopping/flight-offers
+      `https://test.api.amadeus.com/v2/shopping/flight-offers
         ?originLocationCode=${origin}&destinationLocationCode=${destination}
         &departureDate=${departureDate}&adults=${adults}`,
       {
@@ -854,7 +849,7 @@ export default class AmadeusAPI {
   // Uses IATA table code
   getHotels = async (iataCode) => {
     return fetch(
-      `https://cors-anywhere.herokuapp.com/https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?cityCode=${iataCode}`,
+      `https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?cityCode=${iataCode}`,
       {
         method: 'GET',
         headers: {

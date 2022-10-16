@@ -1,283 +1,68 @@
 import ChoooseApiClient from '../apiClients/choooseApiClient';
 
 const avgFlightKmh = 900;
+const trainTicketPriceCoeff = 0.05;
+const avgRailKph = 90;
+const avgCarKph = 99;
+const gasPrice = 3.9;
 
 export default class Graph {
-  constructor() {
-    this.initData = {
-      london: { frankfurt: 678 },
-      frankfurt: { paris: 478 },
-      paris: {}
-    };
+  constructor(minData, userTime, userCarbon, userDollars) {
+    this.initGraph(minData, userTime, userCarbon, userDollars);
   }
 
-  getDistanceFromFlightTime = (time) => {
+  static getDistanceFromFlightTime = (time) => {
     return time * avgFlightKmh;
   };
 
-  getUserGraph = (userTime, userCarbon, userDollarCost) => {
-    const chooseApi = new ChoooseApiClient();
-    const graph = {};
-    Object.keys(this.initData).forEach((source) => {
-      const edges = {};
-      Object.keys(source).forEach((dest) => {
-        const flightCarbonCost = chooseApi.getFlightFootprint(source[dest]);
-        const flightTimeCost = source[dest] / avgFlightKmh;
-        const flightDollarCost = source[dest] * avgFlightTicketPriceCoeff;
+  initGraph = (minData, userTime, userCarbon, userDollars) => {
+    const chooseApiClient = new ChoooseApiClient();
+    const ugraph = {};
+    const egraph = {};
+    const tgraph = {};
+    const pgraph = {};
+    console.log(minData);
+    minData.forEach(async (flight) => {
+      const flightPricePerLeg = Number(flight.price) / flight.links.length;
+      const flightTimePerLeg = Number(flight.time) / flight.links.length;
+      const distancePerLeg = Graph.getDistanceFromFlightTime(flightTimePerLeg);
+      const railPricePerLeg = trainTicketPriceCoeff * distancePerLeg;
+      const railTimePerLeg = distancePerLeg / avgRailKph;
+      const carPricePerLeg = gasPrice * distancePerLeg;
+      const carTimePerLeg = distancePerLeg / avgCarKph;
+      const carEmissionsPerLeg =
+        chooseApiClient.getCarFootprintMock(678).kilosCo2e;
+      const railEmissionsPerLeg =
+        chooseApiClient.getTrainFootprintMock(678).kilosCo2e;
+      const flightEmissionsPerLeg =
+        chooseApiClient.getFlightFootprintByDistanceMock(678).kilosCo2e;
 
-        const flightEdge =
-          flightCarbonCost * (userCarbon / 100) +
-          flightTimeCost * (userTime / 100) +
-          (flightDollarCost * (userDollarCost / 100)) / 3;
+      const flightUserEdge =
+        flightEmissionsPerLeg * (userCarbon / 100) +
+        flightTimePerLeg * (userTime / 100) +
+        flightPricePerLeg * (userDollars / 100);
+      const carUserEdge =
+        carEmissionsPerLeg * (userCarbon / 100) +
+        carTimePerLeg * (userTime / 100) +
+        carPricePerLeg * (userDollars / 100);
+      const railUserEdge =
+        railEmissionsPerLeg * (userCarbon / 100) +
+        railTimePerLeg * (userTime / 100) +
+        railPricePerLeg * (userDollars / 100);
 
-        const railCarbonCost = chooseApi.getRailFootprintByDistanceMock(
-          source[dest]
+      console.log(flight);
+      const start = flight.links.departure;
+      ugraph['start'] = start;
+      flight.links.map((links) => {
+        const arrival = links.arrival;
+        ugraph[links.departure] = {};
+        ugraph[links.departure][arrival] = Math.min(
+          flightUserEdge,
+          carUserEdge,
+          railUserEdge
         );
-        const railTimeCost = source[dest] / avgTrainKmh;
-        const railDollarCost = avgTrainTicketPriceCoeff;
-
-        const railEdge =
-          railCarbonCost * (userCarbon / 100) +
-          railTimeCost * (userTime / 100) +
-          (railDollarCost * (userDollarCost / 100)) / 3;
-
-        const carCarbonCost = chooseApi.getCarFootprintByDistanceMock(
-          source[dest]
-        );
-        const carTimeCost = source[dest] / avgCarKmh;
-        const carDollarCost = (source[dest] / avgKmpg) * avgGasPrice;
-
-        const carEdge =
-          carCarbonCost * (userCarbon / 100) +
-          carTimeCost * (userTime / 100) +
-          (carDollarCost * (userDollarCost / 100)) / 3;
-
-        edges[dest] = {
-          name: source,
-          distance: flightEdge,
-          carbon: flightCarbonCost,
-          time: flightTimeCost,
-          dollar: flightDollarCost
-        };
-        edges[dest] = {
-          name: source,
-          distance: railEdge,
-          carbon: railCarbonCost,
-          time: railTimeCost,
-          dollar: railDollarCost
-        };
-        edges[dest] = {
-          name: source,
-          distance: carEdge,
-          carbon: carCarbonCost,
-          time: carTimeCost,
-          dollar: carDollarCost
-        };
+        console.log(ugraph);
       });
-      graph[source] = edges;
     });
-    return graph;
-  };
-
-  getCarbonGraph = () => {
-    const chooseApi = new ChoooseApiClient();
-    const graph = {};
-    Object.keys(this.initData).forEach((source) => {
-      const edges = {};
-      Object.keys(source).forEach((dest) => {
-        const flightCarbonCost = chooseApi.getFlightFootprintByDistanceMock(
-          source[dest]
-        );
-        const flightTimeCost = source[dest] / avgFlightKmh;
-        const flightDollarCost = source[dest] * avgFlightTicketPriceCoeff;
-
-        const railCarbonCost = chooseApi.getRailFootprintByDistanceMock(
-          source[dest]
-        );
-        const railTimeCost = source[dest] / avgTrainKmh;
-        const railDollarCost = avgTrainTicketPriceCoeff;
-
-        const carCarbonCost = chooseApi.getCarFootprintByDistanceMock(
-          source[dest]
-        );
-        const carTimeCost = source[dest] / avgCarKmh;
-        const carDollarCost = (source[dest] / avgKmpg) * avgGasPrice;
-
-        edges[dest] = {
-          name: source,
-          distance: flightCarbonCost,
-          carbon: flightCarbonCost,
-          time: flightTimeCost,
-          dollar: flightDollarCost
-        };
-        edges[dest] = {
-          name: source,
-          distance: railCarbonCost,
-          carbon: railCarbonCost,
-          time: railTimeCost,
-          dollar: railDollarCost
-        };
-        edges[dest] = {
-          name: source,
-          distance: carCarbonCost,
-          carbon: carCarbonCost,
-          time: carTimeCost,
-          dollar: carDollarCost
-        };
-      });
-      graph[source] = edges;
-    });
-    return graph;
-  };
-
-  getTimeGraph = () => {
-    const chooseApi = new ChoooseApiClient();
-    const graph = {};
-    Object.keys(this.initData).forEach((source) => {
-      const edges = {};
-      Object.keys(source).forEach((dest) => {
-        const flightCarbonCost = chooseApi.getFlightFootprintByDistanceMock(
-          source[dest]
-        );
-        const flightTimeCost = source[dest] / avgFlightKmh;
-        const flightDollarCost = source[dest] * avgFlightTicketPriceCoeff;
-
-        const railCarbonCost = chooseApi.getRailFootprintByDistanceMock(
-          source[dest]
-        );
-        const railTimeCost = source[dest] / avgTrainKmh;
-        const railDollarCost = avgTrainTicketPriceCoeff;
-
-        const carCarbonCost = chooseApi.getCarFootprintByDistanceMock(
-          source[dest]
-        );
-        const carTimeCost = source[dest] / avgCarKmh;
-        const carDollarCost = (source[dest] / avgKmpg) * avgGasPrice;
-
-        edges[dest] = {
-          name: source,
-          distance: flightTimeCost,
-          carbon: flightCarbonCost,
-          time: flightTimeCost,
-          dollar: flightDollarCost
-        };
-        edges[dest] = {
-          name: source,
-          distance: railTimeCost,
-          carbon: railCarbonCost,
-          time: railTimeCost,
-          dollar: railDollarCost
-        };
-        edges[dest] = {
-          name: source,
-          distance: carTimeCost,
-          carbon: carCarbonCost,
-          time: carTimeCost,
-          dollar: carDollarCost
-        };
-      });
-      graph[source] = edges;
-    });
-    return graph;
-  };
-
-  getCostGraph = () => {
-    const chooseApi = new ChoooseApiClient();
-    const graph = {};
-    Object.keys(this.initData).forEach((source) => {
-      const edges = {};
-      Object.keys(source).forEach((dest) => {
-        const flightCarbonCost = chooseApi.getFlightFootprintByDistanceMock(
-          source[dest]
-        );
-        const flightTimeCost = source[dest] / avgFlightKmh;
-        const flightDollarCost = source[dest] * avgFlightTicketPriceCoeff;
-
-        const railCarbonCost = chooseApi.getRailFootprintByDistanceMock(
-          source[dest]
-        );
-        const railTimeCost = source[dest] / avgTrainKmh;
-        const railDollarCost = avgTrainTicketPriceCoeff;
-
-        const carCarbonCost = chooseApi.getCarFootprintByDistanceMock(
-          source[dest]
-        );
-        const carTimeCost = source[dest] / avgCarKmh;
-        const carDollarCost = (source[dest] / avgKmpg) * avgGasPrice;
-
-        edges[dest] = {
-          name: source,
-          distance: flightDollarCost,
-          carbon: flightCarbonCost,
-          time: flightTimeCost,
-          dollar: flightDollarCost
-        };
-        edges[dest] = {
-          name: source,
-          distance: railDollarCost,
-          carbon: railCarbonCost,
-          time: railTimeCost,
-          dollar: railDollarCost
-        };
-        edges[dest] = {
-          name: source,
-          distance: carDollarCost,
-          carbon: carCarbonCost,
-          time: carTimeCost,
-          dollar: carDollarCost
-        };
-      });
-      graph[source] = edges;
-    });
-    return graph;
-  };
-
-  instantiateGraphsWithFootprints = (userTime, userCarbon, userDollarCost) => {
-    const ugraph = getUserGraph(userTime, userCarbon, userDollarCost);
-    const cgraph = getCarbonGraph();
-    const tgraph = getTimeGraph();
-    const costgraph = getCostGraph();
-    this.graphKey = {
-      user: ugraph,
-      carbon: cgraph,
-      time: tgraph,
-      cost: costgraph
-    };
-  };
-
-  runGraphs = () => {
-    const paths = Object.keys(this.graphKey).map((graph) => {
-      return dijkstras(graph);
-    });
-  };
-
-  dijkstras = (graph) => {
-    let distances = {};
-
-    let prev = {};
-    let pq = new PriorityQueue(this.nodes.length * this.nodes.length);
-
-    // Set distances to all nodes to be infinite except startNode
-    distances[startNode] = 0;
-    pq.enqueue(startNode, 0);
-    this.nodes.forEach((node) => {
-      if (node !== startNode) distances[node] = Infinity;
-      prev[node] = null;
-    });
-
-    while (!pq.isEmpty()) {
-      let minNode = pq.dequeue();
-      let currNode = minNode.data;
-      let weight = minNode.priority;
-      this.edges[currNode].forEach((neighbor) => {
-        let alt = distances[currNode] + neighbor.weight;
-        if (alt < distances[neighbor.node]) {
-          distances[neighbor.node] = alt;
-          prev[neighbor.node] = currNode;
-          pq.enqueue(neighbor.node, distances[neighbor.node]);
-        }
-      });
-    }
-    return distances;
   };
 }

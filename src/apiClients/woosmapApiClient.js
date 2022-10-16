@@ -6,7 +6,7 @@ const components = [];
 export default class WoosMapApiClient {
   getLocalityLocation = (localityName) => {
     return fetch(
-      `https://cors-anywhere.herokuapp.com/https://api.woosmap.com/localities/autocomplete/?input=${localityName}&components=country:fr|country:us&key=${publicKey}`,
+      `https://api.woosmap.com/localities/autocomplete/?input=${localityName}&components=country:fr|country:us&key=${publicKey}`,
       {
         method: 'GET',
         redirect: 'follow'
@@ -23,7 +23,7 @@ export default class WoosMapApiClient {
 
   getDistanceByLatLong = (slat, slong, dlat, dlong) => {
     return fetch(
-      `https://cors-anywhere.herokuapp.com/https://api.woosmap.com/distance/distancematrix/json?origins=${slat},${slong}&destinations=${dlat},${dlong}&key=${publicKey}`,
+      `https://api.woosmap.com/distance/distancematrix/json?origins=${slat},${slong}&destinations=${dlat},${dlong}&key=${publicKey}`,
       {
         method: 'GET',
         redirect: 'follow'
