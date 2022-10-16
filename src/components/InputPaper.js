@@ -25,7 +25,8 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import DriveEtaIcon from '@mui/icons-material/DriveEta';
 import DirectionsTransitIcon from '@mui/icons-material/DirectionsTransit';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
-import WOosMapApiClient from '../apiClients/woosmapApiClient';
+import WoosMapApiClient from '../apiClients/woosmapApiClient';
+import AmadeusAPI from '../apiClients/amadeusAPI';
 
 export default function InputPaper() {
   const [srcLoc, setSrcLoc] = useState('');
@@ -176,17 +177,65 @@ export default function InputPaper() {
             variant="contained"
             color="primary"
             onClick={async () => {
-              const woosmapClient = new WOosMapApiClient();
+              const woosmapClient = new WoosMapApiClient();
 
               // get source and dest lat, long as dict {lat, long}
               const srcLocality = await woosmapClient.getLocalityLocation(
-                'paris'
+                'london'
               );
               const dstLocality = await woosmapClient.getLocalityLocation(
-                'boston'
+                'paris'
               );
-              const scrCoords = srcLocality.localities[0].location;
+              const srcCoords = srcLocality.localities[0].location;
               const dstCoords = dstLocality.localities[0].location;
+
+              // get closest airport
+              const amadeusAccessToken = await AmadeusAPI.getAccessToken();
+              const amadeusAPI = new AmadeusAPI(amadeusAccessToken);
+
+              const srcAirport = await amadeusAPI.getNearestAirportByCoords(
+                srcCoords.lat,
+                srcCoords.lng
+              );
+              const destAirport = await amadeusAPI.getNearestAirportByCoords(
+                dstCoords.lat,
+                dstCoords.lng
+              );
+
+              const srcAirportCode = srcAirport.data[0].iataCode;
+              const destAirportCode = destAirport.data[0].iataCode;
+
+              console.log(srcAirportCode, destAirportCode);
+
+              // get flights - mocking because API endpoint is not working
+              const sampleFlights = amadeusAPI.getFlightsMock(
+                srcAirportCode,
+                destAirportCode,
+                startDate
+              );
+
+              console.log(sampleFlights);
+
+              const minData = sampleFlights.data.map((route) => {
+                return {
+                  price: route.price.grandTotal,
+                  time: route.itineraries[0].duration,
+                  links: route.itineraries[0].segments.map((segment) => {
+                    return {
+                      departure: segment['departure'].iataCode,
+                      arrival: segment['arrival'].iataCode
+                    };
+                  })
+                };
+              });
+
+              console.log(minData);
+
+              // initialize graph with proper values for rail and car + user inputs
+
+              // run dijkstra's to get shortest
+
+              // populate routes
             }}
           >
             planit
