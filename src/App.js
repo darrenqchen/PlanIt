@@ -1,21 +1,24 @@
 import React from 'react';
-import Stack from '@mui/material/Stack';
-import { Typography } from '@mui/material';
-import './App.css';
+import { ThemeProvider } from '@mui/material';
+
+import './styles/App.css';
+import LandingPage from './components/LandingPage';
+import PlanPage from './components/PlanPage';
+import { theme } from './config/Theme';
+import { Route, Routes } from 'react-router-dom';
+import './apiClients/amadeusAPI.js';
 
 function App() {
   return (
-    <div
-      style={{
-        backgroundImage: 'url(/under-construction.png)',
-        width: '100vw',
-        height: '100vh'
-      }}
-    >
-      <Stack>
-        <Typography>planit</Typography>
-      </Stack>
-    </div>
+    <ThemeProvider theme={theme}>
+      <main>
+        <Routes>
+          <Route path="/" element={<LandingPage />} exact />
+          <Route path="/plan" element={<PlanPage />} exact />
+          <Route element={Error} />
+        </Routes>
+      </main>
+    </ThemeProvider>
   );
 }
 
