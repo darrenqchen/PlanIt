@@ -2,6 +2,7 @@
 import React from 'react'
 
 const VideoBackground = ({ videoRef }) => {
+
   return (
     <video
       width={'100%'}

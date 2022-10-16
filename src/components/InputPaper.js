@@ -13,7 +13,8 @@ import {
   ToggleButton,
   Button
 } from '@mui/material';
-import PlanitLogoFilled from './PlanitLogoFilled';
+import { borderColor, borderRadius, borders } from '@mui/system';
+import PlanitLogoOutlined from './PlanitLogoOutlined';
 import WoosMapLocalities from './WoosMapLocalities';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -35,27 +36,38 @@ export default function InputPaper() {
   const [endDate, setEndDate] = useState('');
   const [numTravelers, setNumTravelers] = useState('1');
   const [modesOfTranspo, setModesOfTranspo] = useState(['air', 'road', 'rail']);
+  const [loading, setLoading] = useState(true)
 
   return (
-    <Grid container sx={{ height: '100vh' }}>
+    <Grid container sx={{ height: '100%' }}>
       <Grid
         item
         xs={3}
-        paddingTop={2}
-        paddingLeft={2}
-        paddingBottom={2}
+        paddingTop={4}
+        paddingLeft={4}
+        paddingBottom={4}
         sx={{ height: '100%' }}
       >
         <Paper
-          elevation={3}
-          sx={{ height: '100%', position: 'absolute', zIndex: 1, width: '22%' }}
+          elevation={4}
+          sx={{
+            height: '100%',
+            position: 'absolute',
+            zIndex: 1,
+            width: '25%',
+            padding: '1%',
+            backgroundColor: '#FBFAF8'
+          }}
         >
-          <Stack>
+          <Stack spacing={2}>
             <Typography paddingLeft={2} variant="h3">
               planit
             </Typography>
             <TextField
               label="Starting Location"
+              InputLabelProps={{
+                style: { color: 'black' }
+              }}
               variant="outlined"
               value={srcLoc}
               onChange={(event) => {
@@ -64,134 +76,182 @@ export default function InputPaper() {
             />
             <TextField
               label="Destination"
+              InputLabelProps={{
+                style: { color: 'black' }
+              }}
               variant="outlined"
               value={dstLoc}
               onChange={(event) => {
                 setDstLoc(event.target.value);
               }}
+              sx={{ color: 'red' }}
             />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DesktopDatePicker
-                label="Start Date"
-                inputFormat="MM/DD/YYYY"
-                value={startDate}
-                onChange={(change) => {
-                  setStartDate(change);
-                }}
-                renderInput={(params) => <TextField {...params} />}
-              />
-              <DesktopDatePicker
-                label="End Date"
-                inputFormat="MM/DD/YYYY"
-                value={endDate}
-                onChange={(change) => {
-                  setEndDate(change);
-                }}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </LocalizationProvider>
-            <TextField
-              value={numTravelers}
-              onChange={(event) => {
-                setNumTravelers(event.target.value);
-              }}
-              select
-              label="Number of Travellers"
-            >
-              <MenuItem value={1}>1</MenuItem>
-              <MenuItem value={2}>2</MenuItem>
-              <MenuItem value={3}>3</MenuItem>
-              <MenuItem value={4}>4</MenuItem>
-              <MenuItem value={5}>5</MenuItem>
-              <MenuItem value={6}>6</MenuItem>
-              <MenuItem value={7}>7</MenuItem>
-              <MenuItem value={8}>8</MenuItem>
-              <MenuItem value={9}>9</MenuItem>
-              <MenuItem value={10}>10</MenuItem>
-            </TextField>
-            <Stack
-              sx={{ height: 100, paddingTop: 2, paddingLeft: 2 }}
-              spacing={5}
-              direction="row"
-            >
-              <Stack>
-                <Slider
-                  aria-label="Cost"
-                  orientation="vertical"
-                  valueLabelDisplay="auto"
-                  defaultValue={100}
-                  color="primary"
+              <Stack direction="row" spacing={2}>
+                <DesktopDatePicker
+                  label="Start Date"
+                  inputFormat="MM/DD/YYYY"
+                  value={startDate}
+                  onChange={(change) => {
+                    setStartDate(change);
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
                 />
-                <AttachMoneyIcon color="primary" />
+                <DesktopDatePicker
+                  label="End Date"
+                  inputFormat="MM/DD/YYYY"
+                  value={endDate}
+                  onChange={(change) => {
+                    setEndDate(change);
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
+                />
               </Stack>
-              <Stack>
-                <Slider
-                  aria-label="Emissions"
-                  orientation="vertical"
-                  defaultValue={100}
-                  valueLabelDisplay="auto"
-                  color="secondary"
-                />
-                <Co2Icon color="secondary" />
+            </LocalizationProvider>
+
+            {/* 2 column setup */}
+            <Stack direction="row" spacing={2} width={'100%'} height={'180px'}>
+              {/* holds sliders above mode of transport selector */}
+              <Stack direction="column" spacing={2} width={'50%'}>
+                {/* sliders */}
+                <Stack
+                  alignItems={'center'}
+                  justifyContent={'space-around'}
+                  width={'100%'}
+                >
+                  <Stack
+                    direction={'row'}
+                    spacing={2}
+                    width={'100%'}
+                    padding={'5px'}
+                    paddingTop={'10px'}
+                    justifyContent={'space-around'}
+                    
+                    sx={{
+                      border: 1,
+                      borderRadius: '10px',
+                      borderColor: 'lightgray'
+                    }}
+                  >
+                    <Stack direction="column" spacing={0.5} height={'165px'} justifyContent={'space-between'} alignItems={'center'}>
+                      <Slider
+                        aria-label="Cost"
+                        orientation="vertical"
+                        valueLabelDisplay="auto"
+                        defaultValue={50}
+                        color="primary"
+                      />
+                      <AttachMoneyIcon color="primary" />
+                    </Stack>
+
+                    <Stack direction="column" spacing={0.5} justifyContent={'space-between'} alignItems={'center'}>
+                      <Slider
+                        aria-label="Emissions"
+                        orientation="vertical"
+                        defaultValue={50}
+                        valueLabelDisplay="auto"
+                        color="secondary"
+                      />
+                      <Co2Icon color="secondary" />
+                    </Stack>
+
+                    <Stack direction="column" spacing={0.5} justifyContent={'space-between'} alignItems={'center'}>
+                      <Slider
+                        getAriaLabel={() => 'Travel Time'}
+                        orientation="vertical"
+                        defaultValue={50}
+                        valueLabelDisplay="auto"
+                        color="warning"
+                      />
+                      <AccessTimeIcon color="warning" />
+                    </Stack>
+                  </Stack>
+                </Stack>
               </Stack>
 
-              <Stack>
-                <Slider
-                  getAriaLabel={() => 'Travel Time'}
-                  orientation="vertical"
-                  defaultValue={100}
-                  valueLabelDisplay="auto"
-                  color="warning"
-                />
-                <AccessTimeIcon color="warning" />
+              {/* holds travellers and planit */}
+              <Stack 
+                direction="column"
+                width={'50%'}
+                justifyContent={'space-between'}
+              >
+                {/* travellers */}
+                <TextField
+                  value={numTravelers}
+                  onChange={(event) => {
+                    setNumTravelers(event.target.value);
+                  }}
+                  select
+                  label="Number of Travelers"
+                  InputLabelProps={{
+                    style: { color: 'black' }
+                  }}
+                >
+                  <MenuItem value={1}>1</MenuItem>
+                  <MenuItem value={2}>2</MenuItem>
+                  <MenuItem value={3}>3</MenuItem>
+                  <MenuItem value={4}>4</MenuItem>
+                  <MenuItem value={5}>5</MenuItem>
+                  <MenuItem value={6}>6</MenuItem>
+                  <MenuItem value={7}>7</MenuItem>
+                  <MenuItem value={8}>8</MenuItem>
+                  <MenuItem value={9}>9</MenuItem>
+                  <MenuItem value={10}>10</MenuItem>
+                </TextField>
+
+                {/* selector */}
+                <ToggleButtonGroup
+                  value={modesOfTranspo}
+                  exclusive
+                  size = "large"
+                  fullWidth = "true"
+                  onChange={(event, newMode) => {
+                    let newArr = [...modesOfTranspo];
+                    if (modesOfTranspo.includes(newMode)) {
+                      newArr = newArr.filter((ele) => {
+                        return ele !== newMode;
+                      });
+                    } else {
+                      newArr.push(newMode);
+                    }
+                    setModesOfTranspo(newArr);
+                  }}
+                  color="primary"
+                >
+                  <ToggleButton value="road" aria-label="road transport">
+                    <DriveEtaIcon color="primary.dark" />
+                  </ToggleButton>
+                  <ToggleButton value="rail" aria-label="rail transport">
+                    <DirectionsTransitIcon color="primary.dark" />
+                  </ToggleButton>
+                  <ToggleButton value="air" aria-label="air transport">
+                    <FlightTakeoffIcon color="primary.dark" />
+                  </ToggleButton>
+                </ToggleButtonGroup>
+
+                {/* planit */}
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={async () => {
+                    const woosmapClient = new WOosMapApiClient();
+
+                    // get source and dest lat, long as dict {lat, long}
+                    const srcLocality = await woosmapClient.getLocalityLocation(
+                      'paris'
+                    );
+                    const dstLocality = await woosmapClient.getLocalityLocation(
+                      'boston'
+                    );
+                    const scrCoords = srcLocality.localities[0].location;
+                    const dstCoords = dstLocality.localities[0].location;
+                  }}
+                >
+                  planit
+                </Button>
               </Stack>
             </Stack>
           </Stack>
-          <ToggleButtonGroup
-            value={modesOfTranspo}
-            exclusive
-            onChange={(event, newMode) => {
-              let newArr = [...modesOfTranspo];
-              if (modesOfTranspo.includes(newMode)) {
-                newArr = newArr.filter((ele) => {
-                  return ele !== newMode;
-                });
-              } else {
-                newArr.push(newMode);
-              }
-              setModesOfTranspo(newArr);
-            }}
-            color="primary"
-          >
-            <ToggleButton value="road" aria-label="road transport">
-              <DriveEtaIcon color="primary.dark" />
-            </ToggleButton>
-            <ToggleButton value="rail" aria-label="rail transport">
-              <DirectionsTransitIcon color="primary.dark" />
-            </ToggleButton>
-            <ToggleButton value="air" aria-label="air transport">
-              <FlightTakeoffIcon color="primary.dark" />
-            </ToggleButton>
-          </ToggleButtonGroup>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={async () => {
-              const woosmapClient = new WOosMapApiClient();
-
-              // get source and dest lat, long as dict {lat, long}
-              const srcLocality = await woosmapClient.getLocalityLocation(
-                'paris'
-              );
-              const dstLocality = await woosmapClient.getLocalityLocation(
-                'boston'
-              );
-              const scrCoords = srcLocality.localities[0].location;
-              const dstCoords = dstLocality.localities[0].location;
-            }}
-          >
-            planit
-          </Button>
         </Paper>
       </Grid>
     </Grid>
